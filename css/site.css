@@ -85,3 +85,34 @@ pre[class*="language-"] {
     --bs-btn-disabled-color: var(--ts-primary-color);
     --bs-btn-disabled-border-color: var(--ts-primary-color);
 }
+
+#userInput {
+    max-width: 55rem;
+}
+
+
+@media (min-width: 576px) { 
+
+ }
+
+@media (min-width: 768px) { 
+    #userInput {
+        max-width: 50vw;
+    }
+ }
+
+@media (min-width: 992px) { 
+    #userInput {
+        max-width: 40vw;
+    }
+ }
+
+@media (min-width: 1200px) { 
+    #userInput {
+        max-width: 30vw;
+    }
+ }
+
+@media (min-width: 1400px) { 
+
+ }
