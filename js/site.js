@@ -1,14 +1,3 @@
-const displayMessage = () => {
-    const msg = document.getElementById("message").value;
-    Swal.fire(
-        {
-            backdrop: false,
-            title: 'App Name',
-            text: msg
-        }
-    );
-}
-
 const getValues = () => {
     const input = document.getElementById('userInput').value;
     const reversedInput = reverseText(input);
@@ -31,7 +20,7 @@ const checkForPalindrome = (text, reversedText) => {
     if (filteredText) {
         return filteredText.toLowerCase() === filteredReversedText.toLowerCase();
     } else {
-        return false
+        return false;
     }
 }
 
