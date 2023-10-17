@@ -46,5 +46,5 @@ const displayResults = (result, reversedText) => {
         alertBox.classList.add('alert-danger');
         displayHeading.innerText = "Oh no! You did not enter a palindrome"
     }
-    displayMessage.innerText = `Your phrase reversed is ${reversedText}.`
+    displayMessage.innerHTML = `Your phrase reversed is: <strong>${reversedText}</strong>.`
 }

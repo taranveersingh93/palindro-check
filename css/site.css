@@ -90,6 +90,10 @@ pre[class*="language-"] {
     max-width: 55rem;
 }
 
+.display-text {
+    font-weight: 400;
+}
+
 
 @media (min-width: 576px) { 
 
