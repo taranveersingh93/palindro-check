@@ -28,7 +28,11 @@ const checkForPalindrome = (text, reversedText) => {
     const regex = /\W/g;
     const filteredText = text.replace(regex, "");
     const filteredReversedText = reversedText.replace(regex, "");
-    return filteredText.toLowerCase() === filteredReversedText.toLowerCase();
+    if (filteredText) {
+        return filteredText.toLowerCase() === filteredReversedText.toLowerCase();
+    } else {
+        return false
+    }
 }
 
 const displayResults = (result, reversedText) => {
