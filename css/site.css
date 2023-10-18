@@ -5,7 +5,8 @@
     --ts-dark-color: #1b1b1b;
     --ts-primary-color: hsl(210, 17%, 18%);
     --ts-secondary-color: hsl(210, 17%, 95%);
-    --ts-tertiary-color: hsl(210, 17%, 30%);
+    --ts-tertiary-color: #233dff;
+    --ts-accent-color: hsl(233, 81%, 10%);
 }
 
 
@@ -23,15 +24,13 @@ main {
     flex-grow: 1;
 }
 
-
-
 footer {
     flex-shrink: 0;
 }
 
 footer,
 nav.navbar {
-    background-color: var(--ts-primary-color);
+    background-color: var(--ts-accent-color);
     color: var(--ts-light-color);
 }
 
@@ -66,7 +65,7 @@ pre[class*="language-"] {
 }
 
 .btn-primary {
-    --bs-btn-bg: var(--ts-primary-color);
+    --bs-btn-bg: var(--ts-accent-color);
     --bs-btn-border-color: var(--ts-primary-color);
     --bs-btn-hover-bg: var(--ts-tertiary-color);
     --bs-btn-hover-border-color: var(--ts-tertiary-color);
@@ -78,7 +77,7 @@ pre[class*="language-"] {
 .btn-outline-primary {
     --bs-btn-color: var(--ts-primary-color);
     --bs-btn-border-color: var(--ts-primary-color);
-    --bs-btn-hover-bg: var(--ts-primary-color);
+    --bs-btn-hover-bg: var(--ts-accent-color);
     --bs-btn-hover-border-color: var(--ts-primary-color);
     --bs-btn-active-bg: var(--ts-primary-color);
     --bs-btn-active-border-color: var(--ts-primary-color);
@@ -94,6 +93,9 @@ pre[class*="language-"] {
     font-weight: 400;
 }
 
+#msg {
+    margin: 0;
+}
 
 @media (min-width: 576px) { 
 

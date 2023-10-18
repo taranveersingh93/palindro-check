@@ -1,8 +1,7 @@
 const getValues = () => {
     const input = document.getElementById('userInput').value;
-    const reversedInput = reverseText(input);
-    const palindromeResult = checkForPalindrome(input, reversedInput);
-    displayResults(palindromeResult, reversedInput);
+    const palindromeResult = checkForPalindrome(input);
+    displayResults(palindromeResult);
 }
 
 const reverseText = text => {
@@ -13,31 +12,45 @@ const reverseText = text => {
     return reversedText;
 }
 
-const checkForPalindrome = (text, reversedText) => {
+const checkForPalindrome = (text) => {
     const regex = /\W/g;
     const filteredText = text.replace(regex, "");
-    const filteredReversedText = reversedText.replace(regex, "");
-    if (filteredText) {
-        return filteredText.toLowerCase() === filteredReversedText.toLowerCase();
-    } else {
-        return false;
+    const reversedText = reverseText(filteredText);
+
+    const results = {
+        isPalindrome: filteredText.toLowerCase() === reversedText.toLowerCase(),
+        reversedText: reverseText(text),
+        errorMessage: ''
+    };
+
+    if (text && !filteredText) {
+        results.errorMessage = "Your input only consists of symbols."
+    } 
+
+    if (!text && !filteredText) {
+        results.errorMessage = "Please enter some text"
     }
+
+    return results;
 }
 
-const displayResults = (result, reversedText) => {
+const displayResults = (resultObj) => {
     const alertBox = document.getElementById('alert');
     const displayMessage = document.getElementById('msg');
     const displayHeading = document.querySelector('.alert-heading');
-    alertBox.classList.remove('invisible');
     
-    if (result) {
-        alertBox.classList.remove('alert-danger');
+    alertBox.classList.remove('invisible', 'alert-danger', 'alert-success');
+    displayMessage.innerHTML = `Your phrase reversed is: <strong>${resultObj.reversedText}</strong>.`
+    
+    if (resultObj.isPalindrome && !resultObj.errorMessage) {
         alertBox.classList.add('alert-success');
         displayHeading.innerText = `Nice! You entered a palindrome`;
-    } else {
-        alertBox.classList.remove('alert-success');
+    } else if (resultObj.isPalindrome && resultObj.errorMessage) {
         alertBox.classList.add('alert-danger');
-        displayHeading.innerText = "Oh no! You did not enter a palindrome"
+        displayHeading.innerText = resultObj.errorMessage;
+        displayMessage.innerHTML = '';
+    } else {
+        alertBox.classList.add('alert-danger');
+        displayHeading.innerText = 'Oh no! Your input is not a palindrome.'
     }
-    displayMessage.innerHTML = `Your phrase reversed is: <strong>${reversedText}</strong>.`
 }
