@@ -85,6 +85,10 @@ pre[class*="language-"] {
     --bs-btn-disabled-border-color: var(--ts-primary-color);
 }
 
+.navbar-nav {
+    --bs-nav-link-hover-color: white;
+}
+
 #userInput {
     max-width: 55rem;
 }
