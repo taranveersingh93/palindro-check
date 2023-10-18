@@ -135,7 +135,7 @@ const displayResults = (resultObj) => {
 					</pre>
 				</div>
 				<div class="col-12 col-lg-4">
-					<p class="display-6">Abstract</p>
+					<p class="display-6 text-center">Abstract</p>
 					<p>On a high level, I set out to do the following:</p>
 					<ul>
 						<li>Get the user input</li>
@@ -145,14 +145,14 @@ const displayResults = (resultObj) => {
 						<li>Based on the result, display an appropriately styled response</li>
 						<li>If the user doesn't enter any input or enters bad input, display a helpful prompt</li>
 					</ul>
-					<p class="display-6">How I got the values</p>
+					<p class="display-6 text-center">How I got the values</p>
 					<p>
 						My entry function for the app is <code>getValues</code> (line 1). I used <code>getElementById</code> to
 						interact with the DOM element with the ID <code>userInput</code>. In this function, I stored the return
 						value of <code>checkForPalindrome(input)</code> to a variable <code>palindromeResult</code> and passed that
 						as an argument to the <code>displayResults</code> function.
 					</p>
-					<p class="display-6">How I checked for a Palindrome</p>
+					<p class="display-6 text-center">How I checked for a Palindrome</p>
 					<p>
 						In my function <code>checkForPalindrome</code> (line 21), I used a helper function to clean the text by
 						using Regex. I then reversed the text by calling another function <code>reverseText</code> which
@@ -177,7 +177,7 @@ const displayResults = (resultObj) => {
 						<code>filteredText</code> don't have any string length. In this condition, I nudged the user to enter some
 						text.
 					</p>
-					<p class="display-6">How I displayed the results</p>
+					<p class="display-6 text-center">How I displayed the results</p>
 					<p>
 						The final piece of the puzzle is plugging the transformed data back into the DOM or the UI. For this app,
 						that function is <code>displayResults</code> (line 42).
