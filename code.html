@@ -38,7 +38,7 @@
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="nav-item">
-							<a class="nav-link active" href="/index.html">Home</a>
+							<a class="nav-link" href="/index.html">Home</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="/app.html">The App</a>
@@ -69,22 +69,152 @@
 					<!-- pre formatted text. indents and spacing will be preserved -->
 					<pre class="line-numbers">
 						<code class="language-js">
-const displayMessage = () => {
-	const msg = document.getElementById("message").value;
-	Swal.fire(
-		{
-			backdrop: false,
-			title: 'PalindroCheck',
-			text: msg
-		}
-	);
+const getValues = () => {
+	const input = document.getElementById('userInput').value;
+	const palindromeResult = checkForPalindrome(input);
+	displayResults(palindromeResult);
 }
+
+const reverseText = text => {
+	let reversedText = '';
+	for (let i = text.length - 1; i >= 0; i--) {
+		reversedText += text[i];
+	}
+	return reversedText;
+}
+
+const cleanText = input => {
+	const regex = /\W/g;
+	const cleanInput = input.replace(regex, "");
+	return cleanInput;
+}
+
+const checkForPalindrome = (text) => {
+	const filteredText = cleanText(text);
+	const reversedText = reverseText(filteredText);
+
+	const results = {
+		isPalindrome: filteredText.toLowerCase() === reversedText.toLowerCase(),
+		reversedText: reverseText(text),
+		errorMessage: ''
+	};
+
+	if (text && !filteredText) {
+		results.errorMessage = "Please enter an alphanumeric character in the input.";
+	} 
+
+	if (!text && !filteredText) {
+		results.errorMessage = "Please enter some text.";
+	}
+
+	return results;
+}
+
+const displayResults = (resultObj) => {
+	const alertBox = document.getElementById('alert');
+	const displayMessage = document.getElementById('msg');
+	const displayHeading = document.querySelector('.alert-heading');
+	
+	alertBox.classList.remove('invisible', 'alert-danger', 'alert-success');
+	displayMessage.innerHTML = `Your phrase reversed is: <strong>${resultObj.reversedText}</strong>.`
+	
+	if (resultObj.isPalindrome && !resultObj.errorMessage) {
+		alertBox.classList.add('alert-success');
+		displayHeading.innerText = `Nice! You entered a palindrome`;
+	} else if (resultObj.isPalindrome && resultObj.errorMessage) {
+		alertBox.classList.add('alert-danger');
+		displayHeading.innerText = resultObj.errorMessage;
+		displayMessage.innerHTML = '';
+	} else {
+		alertBox.classList.add('alert-danger');
+		displayHeading.innerText = 'Oh no! Your input is not a palindrome.'
+	}
+}
+
 						</code>
 					</pre>
 				</div>
 				<div class="col-12 col-lg-4">
-					<p>The code is structured in one function <code>displayMessage</code>.</p>
-					<p><code>displayMessage</code> displayes a sweetAlert when the button is pressed.</p>
+					<p class="display-6">Abstract</p>
+					<p>On a high level, I set out to do the following:</p>
+					<ul>
+						<li>Get the user input</li>
+						<li>Transform that input to remove spaces, special characters and ignore uppercase</li>
+						<li>Reverse the cleaned up input</li>
+						<li>Compare the cleaned versions of the original and reversed text</li>
+						<li>Based on the result, display an appropriately styled response</li>
+						<li>If the user doesn't enter any input or enters bad input, display a helpful prompt</li>
+					</ul>
+					<p class="display-6">How I got the values</p>
+					<p>
+						My entry function for the app is <code>getValues</code> (line 1). I used <code>getElementById</code> to
+						interact with the DOM element with the ID <code>userInput</code>. In this function, I stored the return
+						value of <code>checkForPalindrome(input)</code> to a variable <code>palindromeResult</code> and passed that
+						as an argument to the <code>displayResults</code> function.
+					</p>
+					<p class="display-6">How I checked for a Palindrome</p>
+					<p>
+						In my function <code>checkForPalindrome</code> (line 21), I used a helper function to clean the text by
+						using Regex. I then reversed the text by calling another function <code>reverseText</code> which
+						decrimentally loops through the text character by character, adds each character to an initially empty
+						string and finally returns the reversed string. I initialize the <code>results</code> object (line 25) which
+						contains three important attributes that will help me outside this function:
+					</p>
+					<ul>
+						<li>
+							<code>isPalindrome</code> that stores the boolean result of comparing the lowercased input and lowercased
+							reversed string.
+						</li>
+						<li><code>reversedText</code> that I later needed to display for the user.</li>
+						<li><code>errorMessage</code> that I later needed for helpful error handling.</li>
+					</ul>
+					<p>
+						Next I checked for two different errors and assigned a corresponding string to the
+						<code>errorMessage</code>. If there's any string length in <code>text</code> but not in
+						<code>filteredText</code>, we can conclude that the <code>text</code> only consists of spaces or symbols
+						because we only cleared those out in the <code>cleanText</code> function. For this condition, I ask the user
+						to enter an alphanumeric character. I then checked for another condition where both <code>text</code> and
+						<code>filteredText</code> don't have any string length. In this condition, I nudged the user to enter some
+						text.
+					</p>
+					<p class="display-6">How I displayed the results</p>
+					<p>
+						The final piece of the puzzle is plugging the transformed data back into the DOM or the UI. For this app,
+						that function is <code>displayResults</code> (line 42).
+					</p>
+					<p>
+						I first removed all the existing classes that were contributing to styling the <code>alertBox</code>. This
+						way, I was working with a blank slate visually so any CSS class I added here onwards, wouldn't clash with
+						existing classes.
+					</p>
+					<p>Now logically, I had 3 cases to consider:</p>
+					<ul>
+						<li>
+							The text is a palindrome and is neither an empty string nor made up only of non-alphanumeric characters.
+							Depicted by <code>(resultObj.isPalindrome && !resultObj.errorMessage)</code>
+						</li>
+						<li>
+							The text is a false palindrome in that, the reversed input matched the input but the input was either
+							empty string, whitespaces or made up only of special characters. Depicted by
+							<code>(resultObj.isPalindrome && resultObj.errorMessage)</code>
+						</li>
+						<li>
+							Finally, any other case which means, the input was valid but it's just not a palindrome. Depicted by
+							<code>else</code> scenario.
+						</li>
+					</ul>
+					<p>
+						In the first case, I added the success styling to the alertbox and manipulated the heading text to display
+						success.
+					</p>
+					<p>
+						In the second case, I added the error styling to the alertbox and displayed the error message we stored in
+						<code>result</code> object's <code>errorMessage</code> property.
+					</p>
+					<p>
+						In the final condition, where the input is valid but not a palindrome, I added the error styling and the
+						result text.
+					</p>
 				</div>
 			</div>
 		</main>

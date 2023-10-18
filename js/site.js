@@ -12,9 +12,14 @@ const reverseText = text => {
     return reversedText;
 }
 
-const checkForPalindrome = (text) => {
+const cleanText = input => {
     const regex = /\W/g;
-    const filteredText = text.replace(regex, "");
+    const cleanInput = input.replace(regex, "");
+    return cleanInput;
+}
+
+const checkForPalindrome = (text) => {
+    const filteredText = cleanText(text);
     const reversedText = reverseText(filteredText);
 
     const results = {
@@ -24,11 +29,11 @@ const checkForPalindrome = (text) => {
     };
 
     if (text && !filteredText) {
-        results.errorMessage = "Your input only consists of symbols."
+        results.errorMessage = "Please enter an alphanumeric character in the input.";
     } 
 
     if (!text && !filteredText) {
-        results.errorMessage = "Please enter some text"
+        results.errorMessage = "Please enter some text.";
     }
 
     return results;
