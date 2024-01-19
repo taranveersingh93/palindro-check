@@ -70,10 +70,10 @@
 					</div>
 					<div class="lead text-center mb-5">Enter some text in the input box and click the "PalindroCheck" button</div>
 					<div class="">
-						<form action="#">
+						<form action="#" onsubmit="getValues(event)">
 							<label for="message" class="form-label">Enter the text to check:</label>
 							<input class="form-control" placeholder="Sample text" type="text" id="userInput" name="userInput" />
-							<button class="btn btn-primary mt-3 p-2" id="btnSubmit" type="button">PalindroCheck</button>
+							<button class="btn btn-primary mt-3 p-2" id="btnSubmit" type="submit">PalindroCheck</button>
 						</form>
 						<div class="alert mt-3 invisible" id="alert" role="alert">
 							<h2 class="alert-heading"></h2>

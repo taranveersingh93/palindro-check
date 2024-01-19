@@ -1,4 +1,5 @@
-const getValues = () => {
+const getValues = (event) => {
+    event.preventDefault();
     const input = document.getElementById('userInput').value;
     const palindromeResult = checkForPalindrome(input);
     displayResults(palindromeResult);
