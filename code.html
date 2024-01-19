@@ -69,7 +69,8 @@
 					<!-- pre formatted text. indents and spacing will be preserved -->
 					<pre class="line-numbers">
 						<code class="language-js">
-const getValues = () => {
+const getValues = (event) => {
+	event.preventDefault();
 	const input = document.getElementById('userInput').value;
 	const palindromeResult = checkForPalindrome(input);
 	displayResults(palindromeResult);
@@ -147,17 +148,19 @@ const displayResults = (resultObj) => {
 					</ul>
 					<p class="display-6 text-center">How I got the values</p>
 					<p>
-						My entry function for the app is <code>getValues</code> (line 1). I used <code>getElementById</code> to
-						interact with the DOM element with the ID <code>userInput</code>. In this function, I stored the return
-						value of <code>checkForPalindrome(input)</code> to a variable <code>palindromeResult</code> and passed that
-						as an argument to the <code>displayResults</code> function.
+						My entry function for the app is <code>getValues</code> (line 1). This is triggered by a form submit. A form
+						submission event causes a page to refresh. To avoid the page refresh, I have
+						<code>event.preventDefault()</code>. I used <code>getElementById</code> to interact with the DOM element
+						with the ID <code>userInput</code>. In this function, I stored the return value of
+						<code>checkForPalindrome(input)</code> to a variable <code>palindromeResult</code> and passed that as an
+						argument to the <code>displayResults</code> function.
 					</p>
 					<p class="display-6 text-center">How I checked for a Palindrome</p>
 					<p>
-						In my function <code>checkForPalindrome</code> (line 21), I used a helper function to clean the text by
+						In my function <code>checkForPalindrome</code> (line 22), I used a helper function to clean the text by
 						using Regex. I then reversed the text by calling another function <code>reverseText</code> which
 						decrimentally loops through the text character by character, adds each character to an initially empty
-						string and finally returns the reversed string. I initialize the <code>results</code> object (line 25) which
+						string and finally returns the reversed string. I initialize the <code>results</code> object (line 26) which
 						contains three important attributes that will help me outside this function:
 					</p>
 					<ul>
@@ -180,7 +183,7 @@ const displayResults = (resultObj) => {
 					<p class="display-6 text-center">How I displayed the results</p>
 					<p>
 						The final piece of the puzzle is plugging the transformed data back into the DOM or the UI. For this app,
-						that function is <code>displayResults</code> (line 42).
+						that function is <code>displayResults</code> (line 43).
 					</p>
 					<p>
 						I first removed all the existing classes that were contributing to styling the <code>alertBox</code>. This
